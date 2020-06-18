@@ -1,38 +1,67 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace LessonOne
 {
-    class Program
+     public class Program 
     {
+        static int[] array = new int[3];
+        public static int IntValue = 9;
+
+        
+
         static void Main(string[] args)
         {
+            int a;
+            Console.WriteLine("Enter size of Array:-");
+            a = int.Parse(Console.ReadLine());
 
-            int[] array1 = new int[3];
-            string line = Console.ReadLine();
-            int value;
-            value = Convert.ToInt32(line);
-            array1[0] = value;
-            line = Console.ReadLine();
+            Program.array = new int[a];
+            Console.WriteLine("Enter the Elements of the Array:-");
+            for (int i = 0; i < array.Length; i++)
+            {
+                try
+                {
+                    int v = int.Parse(Console.ReadLine());
+                    Console.WriteLine("ok");
+                    Program.ArrayInput(i, v);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
+                }
+            }
+            Console.WriteLine("\nThe Elemets of the Array are:-");
+            for (int j = 0; j < array.Length; j++)
+            {
+                Console.WriteLine(array[j]);
+            }
 
-            value = Convert.ToInt32(line);
-            array1[1] = value;
-            value = Convert.ToInt32(line);
-            line = Console.ReadLine();
-            
-            value = Convert.ToInt32(line);
-            array1[2] = value;
-            value = Convert.ToInt32(line);
-            line = Console.ReadLine();
+            Program.SortArray();
 
-
-            Array.ForEach(array1, Console.WriteLine);
-
-            Array.Sort(array1);
-
-            Array.ForEach(array1, Console.WriteLine);
+            Array.ForEach(array, Console.WriteLine);
 
 
             Console.ReadLine();
+        }
+
+        public static void SortArray()
+        {
+            Array.Sort(array);
+        }
+
+        public static void ArrayInput(int index, int value)
+        {
+            Program.array[index] = value;
+        }
+
+        public static int[] GetArray()
+        {
+            return Program.array; 
         }
     }
 }
